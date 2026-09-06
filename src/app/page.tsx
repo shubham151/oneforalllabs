@@ -46,6 +46,31 @@ function projects() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
         {card("Text Sanitizer", "https://sanitize.oneforalllabs.com", "Instantly scrub Personally Identifiable Information (PII) from text using advanced NLP.", ["privacy", "fastapi", "nlp"])}
         {card("Webhook Catcher", "https://catch.oneforalllabs.com", "Generate a unique URL to capture, inspect, and analyze incoming HTTP payloads in real-time.", ["devtools", "api", "real-time"])}
+        {card("Impact Dashboard", "https://impact.oneforalllabs.com", "Track engineering impact across multiple GitHub repositories by analyzing delivery, collaboration, and quality.", ["analytics", "github", "metrics"])}
+        {card("JWT Debugger", "https://decode.oneforalllabs.com", "Local-first JWT decoder and signature verifier. Built for absolute privacy with zero server calls.", ["privacy", "security", "devtools"])}
+        {card("JSON Formatter", "https://format.oneforalllabs.com", "Lightning-fast local JSON formatter and tree viewer capable of parsing massive payloads.", ["devtools", "json", "wasm"])}
+        {card("Cron Visualizer", "https://cron.oneforalllabs.com", "Clean cron expression translator that displays human-readable schedules and upcoming execution times.", ["devtools", "schedule", "cron"])}
+        {card("Env Validator", "https://env.oneforalllabs.com", "Zero-trust local .env file validator that instantly catches syntax errors and duplicate keys.", ["privacy", "config", "devtools"])}
+        {card("Timezone Slider", "https://zone.oneforalllabs.com", "Unified timezone slider to visually find overlapping working hours across global remote teams.", ["productivity", "remote", "time"])}
+      </div>
+    </section>
+  );
+}
+
+function requests() {
+  return (
+    <section>
+      <h2 className="text-[13px] font-mono font-semibold tracking-[0.1em] uppercase text-muted m-0 mb-[24px] pb-[8px] border-b border-line flex justify-between items-end">
+        <span>Request a Tool</span>
+      </h2>
+      <div className="bg-surface-2 border border-line rounded-[3px] p-[24px]">
+        <h3 className="m-0 text-[18px] font-semibold text-ink mb-[12px]">What should we build next?</h3>
+        <p className="m-0 text-muted text-[14px] leading-relaxed mb-[24px] max-w-[60ch]">
+          Have an idea for a clean, single-purpose micro-tool? Suggest it in our GitHub discussions. You can also upvote existing ideas to help prioritize what gets built next.
+        </p>
+        <a href="https://github.com/shubham151/oneforalllabs/discussions" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[8px] bg-ink text-surface px-[16px] py-[8px] rounded-[3px] text-[13px] font-medium hover:bg-accent transition-colors">
+          Suggest a Tool
+        </a>
       </div>
     </section>
   );
@@ -56,6 +81,7 @@ function view() {
     <div className="max-w-[1180px] mx-auto px-[28px] py-[56px] pb-[96px] flex flex-col gap-[64px]">
       {header()}
       {projects()}
+      {requests()}
     </div>
   );
 }
