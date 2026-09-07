@@ -104,14 +104,14 @@ export default function Home() {
   const regular = filteredTools.filter(t => !t.featured);
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-bg text-ink font-sans">
+    <div className="min-h-screen relative overflow-hidden bg-bg text-ink font-sans flex flex-col">
       {/* Background Gradients */}
       <div className="absolute top-[-10%] left-[50%] w-[80%] h-[60%] bg-accent/5 rounded-full blur-[120px] pointer-events-none -translate-x-1/2" />
       <div className="absolute bottom-[20%] right-[10%] w-[40%] h-[50%] bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Top Navigation / Social Links */}
       <nav className="absolute top-0 left-0 w-full p-6 flex justify-end gap-6 z-20">
-        <a href="https://github.com/oneforalllabs/discussions/discussions" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors">
+        <a href="https://github.com/shubham151/oneforalllabs/discussions" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors">
           <MessageSquare size={16} /> Discussions
         </a>
         <a href="https://github.com/shubham151" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors">
@@ -120,7 +120,7 @@ export default function Home() {
           </svg>
           GitHub
         </a>
-        <a href="https://linkedin.com/in/shubham-kumar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors">
+        <a href="https://www.linkedin.com/in/spidermines/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors">
           <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
             <rect x="2" y="9" width="4" height="12"></rect>
@@ -130,13 +130,13 @@ export default function Home() {
         </a>
       </nav>
 
-      <div className="max-w-[1180px] mx-auto px-6 py-24 relative z-10">
+      <div className="max-w-[1180px] mx-auto px-6 py-24 relative z-10 flex-grow">
         
         {/* Hero */}
         <header className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-line bg-surface/50 text-[11px] font-semibold text-muted uppercase tracking-widest mb-8 backdrop-blur-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-            Zero-Build · 100% Free · Offline Capable
+            Zero-Build · 100% Free · No BS
           </div>
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
             One For All Labs
@@ -232,13 +232,18 @@ export default function Home() {
             </div>
           )}
         </div>
-
-        {/* Footer */}
-        <footer className="mt-20 pt-8 border-t border-line text-center text-xs text-muted font-mono uppercase tracking-widest">
-          100% In-Browser · Open Source · Designed for Speed
-        </footer>
-
       </div>
+      
+      {/* Footer */}
+      <footer className="mt-auto py-8 border-t border-line flex flex-col items-center justify-center text-center gap-2">
+        <p className="text-sm text-ink font-medium">Missing a tool you need every day?</p>
+        <a href="https://github.com/shubham151/oneforalllabs/discussions" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent-hover font-semibold mb-4 transition-colors">
+          Submit a request in Discussions &rarr;
+        </a>
+        <p className="text-xs text-muted font-mono uppercase tracking-widest">
+          100% In-Browser · Open Source · Designed for Speed
+        </p>
+      </footer>
     </div>
   );
 }
