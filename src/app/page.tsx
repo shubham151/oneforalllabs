@@ -1,89 +1,213 @@
-function header() {
-  return (
-    <header>
-      <div className="mb-[10px]">
-        <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-accent m-0">Welcome</p>
-      </div>
-      <h1 className="text-[34px] font-semibold tracking-tight mb-[12px] text-balance">One For All Labs</h1>
-      <p className="max-w-[64ch] text-muted m-0 text-[15px] leading-relaxed">
-        I build clean, single-purpose micro-tools focused on privacy and developer productivity. Everything here is fast, free, and designed without clutter.
-      </p>
-      <div className="flex gap-[16px] mt-[24px]">
-        <a href="https://github.com/shubham151" target="_blank" rel="noopener noreferrer" className="flex items-center gap-[8px] bg-surface-2 border border-line px-[16px] py-[8px] rounded-[3px] text-[13px] font-medium text-ink hover:bg-line transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          GitHub
-        </a>
-        <a href="https://linkedin.com/in/spidermines" target="_blank" rel="noopener noreferrer" className="flex items-center gap-[8px] bg-surface-2 border border-line px-[16px] py-[8px] rounded-[3px] text-[13px] font-medium text-ink hover:bg-line transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          LinkedIn
-        </a>
-      </div>
-    </header>
-  );
-}
+'use client';
+import { useState } from 'react';
+import { Search, Terminal, Shield, FileJson, Clock, Code, Settings, Globe, Database, Activity, RefreshCw } from 'lucide-react';
 
-function card(title: string, link: string, desc: string, tags: string[]) {
-  return (
-    <a href={link} className="group block bg-surface border border-line rounded-[3px] p-[24px] hover:border-accent transition-colors no-underline">
-      <div className="flex items-start justify-between mb-[16px]">
-        <h3 className="m-0 text-[18px] font-semibold text-ink group-hover:text-accent transition-colors">{title}</h3>
-        <span className="font-mono text-[11px] bg-accent-soft text-accent px-[6px] py-[2px] rounded-[2px] font-bold">LIVE</span>
-      </div>
-      <p className="m-0 text-muted text-[14px] leading-relaxed mb-[24px]">{desc}</p>
-      <div className="font-mono text-[12px] text-faint flex gap-[12px]">
-        {tags.map(function map(tag) { return <span key={tag}>#{tag}</span>; })}
-      </div>
-    </a>
-  );
-}
+const TOOLS = [
+  {
+    id: 'impact',
+    name: 'Impact Dashboard',
+    desc: 'Measure engineering velocity, PR metrics, and calculate true ROI for your development teams in real-time.',
+    url: 'https://impact.oneforalllabs.com',
+    category: 'business',
+    featured: true,
+    icon: <Activity size={20} />,
+    color: 'emerald'
+  },
+  {
+    id: 'cron',
+    name: 'Cron Studio',
+    desc: 'Visually build complex cron schedules, decrypt existing ones into plain English, and plot upcoming execution times.',
+    url: 'https://cron.oneforalllabs.com',
+    category: 'dev',
+    featured: true,
+    icon: <Clock size={20} />,
+    color: 'indigo'
+  },
+  {
+    id: 'webhook',
+    name: 'Webhook Catcher',
+    desc: 'Generate instant, temporary endpoints to inspect, debug, and log incoming HTTP webhook payloads.',
+    url: 'https://catch.oneforalllabs.com',
+    category: 'dev',
+    featured: true,
+    icon: <Database size={20} />,
+    color: 'sky'
+  },
+  {
+    id: 'text',
+    name: 'Text Sanitizer',
+    desc: 'Strip API keys, secrets, PII, and sensitive tokens from massive logs before sharing them safely.',
+    url: 'https://sanitize.oneforalllabs.com',
+    category: 'security',
+    icon: <Shield size={18} />,
+    color: 'red'
+  },
+  {
+    id: 'jwt',
+    name: 'JWT Debugger',
+    desc: 'Decode JSON Web Tokens and inspect headers, payloads, and expiries instantly entirely offline.',
+    url: 'https://decode.oneforalllabs.com',
+    category: 'security',
+    icon: <Settings size={18} />,
+    color: 'amber'
+  },
+  {
+    id: 'json',
+    name: 'JSON Formatter',
+    desc: 'Beautify, format, minify, and validate complex JSON payloads safely in your browser.',
+    url: 'https://format.oneforalllabs.com',
+    category: 'formatting',
+    icon: <FileJson size={18} />,
+    color: 'pink'
+  },
+  {
+    id: 'env',
+    name: 'Env Validator',
+    desc: 'Parse .env files, find duplicates, check for syntax errors, and sort variables instantly.',
+    url: 'https://env.oneforalllabs.com',
+    category: 'dev',
+    icon: <Terminal size={18} />,
+    color: 'violet'
+  },
+  {
+    id: 'zone',
+    name: 'Timezone Slider',
+    desc: 'Visually slide across a 24-hour timeline to synchronize global meetings across multiple timezones.',
+    url: 'https://zone.oneforalllabs.com',
+    category: 'formatting',
+    icon: <Globe size={18} />,
+    color: 'teal'
+  }
+];
 
-function projects() {
-  return (
-    <section>
-      <h2 className="text-[13px] font-mono font-semibold tracking-[0.1em] uppercase text-muted m-0 mb-[24px] pb-[8px] border-b border-line flex justify-between items-end">
-        <span>Active Projects</span>
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
-        {card("Text Sanitizer", "https://sanitize.oneforalllabs.com", "Instantly scrub Personally Identifiable Information (PII) from text using advanced NLP.", ["privacy", "fastapi", "nlp"])}
-        {card("Webhook Catcher", "https://catch.oneforalllabs.com", "Generate a unique URL to capture, inspect, and analyze incoming HTTP payloads in real-time.", ["devtools", "api", "real-time"])}
-        {card("Impact Dashboard", "https://impact.oneforalllabs.com", "Track engineering impact across multiple GitHub repositories by analyzing delivery, collaboration, and quality.", ["analytics", "github", "metrics"])}
-        {card("JWT Debugger", "https://decode.oneforalllabs.com", "Local-first JWT decoder and signature verifier. Built for absolute privacy with zero server calls.", ["privacy", "security", "devtools"])}
-        {card("JSON Formatter", "https://format.oneforalllabs.com", "Lightning-fast local JSON formatter and tree viewer capable of parsing massive payloads.", ["devtools", "json", "wasm"])}
-        {card("Cron Visualizer", "https://cron.oneforalllabs.com", "Clean cron expression translator that displays human-readable schedules and upcoming execution times.", ["devtools", "schedule", "cron"])}
-        {card("Env Validator", "https://env.oneforalllabs.com", "Zero-trust local .env file validator that instantly catches syntax errors and duplicate keys.", ["privacy", "config", "devtools"])}
-        {card("Timezone Slider", "https://zone.oneforalllabs.com", "Unified timezone slider to visually find overlapping working hours across global remote teams.", ["productivity", "remote", "time"])}
-      </div>
-    </section>
-  );
-}
+export default function Home() {
+  const [search, setSearch] = useState('');
+  const [activeCat, setActiveCat] = useState('all');
 
-function requests() {
-  return (
-    <section>
-      <h2 className="text-[13px] font-mono font-semibold tracking-[0.1em] uppercase text-muted m-0 mb-[24px] pb-[8px] border-b border-line flex justify-between items-end">
-        <span>Request a Tool</span>
-      </h2>
-      <div className="bg-surface-2 border border-line rounded-[3px] p-[24px]">
-        <h3 className="m-0 text-[18px] font-semibold text-ink mb-[12px]">What should we build next?</h3>
-        <p className="m-0 text-muted text-[14px] leading-relaxed mb-[24px] max-w-[60ch]">
-          Have an idea for a clean, single-purpose micro-tool? Suggest it in our GitHub discussions. You can also upvote existing ideas to help prioritize what gets built next.
-        </p>
-        <a href="https://github.com/shubham151/oneforalllabs/discussions" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[8px] bg-ink text-surface px-[16px] py-[8px] rounded-[3px] text-[13px] font-medium hover:bg-accent transition-colors">
-          Suggest a Tool
-        </a>
-      </div>
-    </section>
-  );
-}
+  const filteredTools = TOOLS.filter(t => {
+    const matchesSearch = t.name.toLowerCase().includes(search.toLowerCase()) || t.desc.toLowerCase().includes(search.toLowerCase());
+    const matchesCat = activeCat === 'all' || t.category === activeCat;
+    return matchesSearch && matchesCat;
+  });
 
-function view() {
+  const featured = filteredTools.filter(t => t.featured);
+  const regular = filteredTools.filter(t => !t.featured);
+
   return (
-    <div className="max-w-[1180px] mx-auto px-[28px] py-[56px] pb-[96px] flex flex-col gap-[64px]">
-      {header()}
-      {projects()}
-      {requests()}
+    <div className="min-h-screen relative overflow-hidden bg-bg text-ink font-sans">
+      {/* Background Gradients */}
+      <div className="absolute top-[-10%] left-[50%] w-[80%] h-[60%] bg-accent/5 rounded-full blur-[120px] pointer-events-none -translate-x-1/2" />
+      <div className="absolute bottom-[20%] right-[10%] w-[40%] h-[50%] bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-[1180px] mx-auto px-6 py-20 relative z-10">
+        
+        {/* Hero */}
+        <header className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-line bg-surface/50 text-[11px] font-semibold text-muted uppercase tracking-widest mb-8 backdrop-blur-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+            Zero-Build · 100% Free · Offline Capable
+          </div>
+          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
+            One For All Labs
+          </h1>
+          <p className="text-muted text-lg max-w-2xl mx-auto leading-relaxed">
+            The ultimate ecosystem of single-purpose micro-tools for developers. <br/>
+            No installs, no accounts, no telemetry — just pure speed.
+          </p>
+        </header>
+
+        {/* Controls: Search + Filters */}
+        <div className="flex flex-col md:flex-row gap-6 mb-12 items-center justify-between">
+          <div className="relative w-full md:w-[320px]">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-faint" size={18} />
+            <input 
+              type="text" 
+              placeholder="Search tools..." 
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full bg-surface/80 border border-line rounded-full py-3 pl-12 pr-4 text-sm text-ink focus:border-accent outline-none backdrop-blur-sm transition-colors"
+            />
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-2">
+            {[
+              { id: 'all', label: 'All Tools' },
+              { id: 'dev', label: 'Dev & QA' },
+              { id: 'security', label: 'Security' },
+              { id: 'formatting', label: 'Formatting' },
+              { id: 'business', label: 'Business' }
+            ].map(cat => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCat(cat.id)}
+                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 border ${
+                  activeCat === cat.id 
+                    ? 'bg-accent/10 border-accent/30 text-accent shadow-[0_0_15px_rgba(12,106,96,0.15)]' 
+                    : 'bg-surface/50 border-line text-muted hover:border-line-strong hover:text-ink backdrop-blur-sm'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* Featured Cards */}
+          {featured.map(tool => (
+            <a 
+              key={tool.id} 
+              href={tool.url}
+              className="group col-span-1 md:col-span-2 lg:col-span-2 flex flex-col justify-between bg-surface/40 border border-line hover:border-accent/50 rounded-2xl p-8 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent/5"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className={`w-12 h-12 rounded-xl bg-${tool.color}-500/10 border border-${tool.color}-500/20 flex items-center justify-center text-${tool.color}-500 group-hover:scale-110 transition-transform`}>
+                    {tool.icon}
+                  </div>
+                  <span className={`text-[10px] font-bold uppercase tracking-widest text-${tool.color}-500 bg-${tool.color}-500/10 px-3 py-1 rounded-full border border-${tool.color}-500/20`}>
+                    Featured
+                  </span>
+                </div>
+                <h2 className="text-2xl font-bold text-ink mb-3">{tool.name}</h2>
+                <p className="text-muted leading-relaxed max-w-lg">{tool.desc}</p>
+              </div>
+            </a>
+          ))}
+
+          {/* Regular Cards */}
+          {regular.map(tool => (
+            <a 
+              key={tool.id} 
+              href={tool.url}
+              className="group flex flex-col justify-between bg-surface/40 border border-line hover:border-accent/50 rounded-2xl p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent/5"
+            >
+              <div>
+                <div className="flex items-start justify-between mb-5">
+                  <div className={`w-10 h-10 rounded-xl bg-${tool.color}-500/10 border border-${tool.color}-500/20 flex items-center justify-center text-${tool.color}-500 group-hover:scale-110 transition-transform`}>
+                    {tool.icon}
+                  </div>
+                </div>
+                <h2 className="text-lg font-semibold text-ink mb-2">{tool.name}</h2>
+                <p className="text-sm text-muted leading-relaxed">{tool.desc}</p>
+              </div>
+            </a>
+          ))}
+
+          {filteredTools.length === 0 && (
+            <div className="col-span-full py-20 text-center">
+              <p className="text-muted text-lg">No tools found matching your search.</p>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <footer className="mt-20 pt-8 border-t border-line text-center text-xs text-muted font-mono uppercase tracking-widest">
+          100% In-Browser · Open Source · Designed for Speed
+        </footer>
+
+      </div>
     </div>
   );
 }
-
-export default view;
