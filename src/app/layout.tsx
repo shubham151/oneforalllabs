@@ -17,9 +17,21 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "One For All Labs | Micro-Tools",
-  description: "A collection of clean, single-purpose developer and privacy tools.",
-  keywords: "tools, privacy, developer tools, one for all labs",
+  title: "One For All Labs — Zero-Build Micro-Tools",
+  description: "The ultimate ecosystem of single-purpose micro-tools for developers. No installs, no accounts, no telemetry — just pure speed.",
+  keywords: "developer tools, offline tools, json formatter, jwt decoder, cron builder, webhook catcher",
+  openGraph: {
+    title: "One For All Labs — Zero-Build Micro-Tools",
+    description: "The ultimate ecosystem of single-purpose micro-tools for developers. No installs, no accounts, no telemetry — just pure speed.",
+    url: "https://oneforalllabs.com",
+    siteName: "One For All Labs",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "One For All Labs — Zero-Build Micro-Tools",
+    description: "The ultimate ecosystem of single-purpose micro-tools for developers.",
+  }
 };
 
 export default function RootLayout({
