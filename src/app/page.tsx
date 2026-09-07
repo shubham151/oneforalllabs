@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Search, Terminal, Shield, FileJson, Clock, Code, Settings, Globe, Database, Activity, MessageSquare } from 'lucide-react';
+import { Search, Terminal, Shield, FileJson, Clock, Code, Settings, Globe, Database, Activity, MessageSquare, Wrench } from 'lucide-react';
 
 const TOOLS = [
   {
@@ -22,6 +22,16 @@ const TOOLS = [
     featured: true,
     icon: <Clock size={20} />,
     color: 'indigo'
+  },
+  {
+    id: 'toolbox',
+    name: 'Dev Toolbox',
+    desc: 'The ultimate offline Swiss Army knife. JWT, Base64, JSON, Regex, and Hash generation with smart clipboard detection.',
+    url: 'https://dev.oneforalllabs.com',
+    category: 'dev',
+    featured: true,
+    icon: <Wrench size={20} />,
+    color: 'amber'
   },
   {
     id: 'webhook',
