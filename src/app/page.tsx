@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Search, Terminal, Shield, FileJson, Clock, Code, Settings, Globe, Database, Activity, RefreshCw } from 'lucide-react';
+import { Search, Terminal, Shield, FileJson, Clock, Code, Settings, Globe, Database, Activity, Github, Linkedin, MessageSquare } from 'lucide-react';
 
 const TOOLS = [
   {
@@ -99,7 +99,20 @@ export default function Home() {
       <div className="absolute top-[-10%] left-[50%] w-[80%] h-[60%] bg-accent/5 rounded-full blur-[120px] pointer-events-none -translate-x-1/2" />
       <div className="absolute bottom-[20%] right-[10%] w-[40%] h-[50%] bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-[1180px] mx-auto px-6 py-20 relative z-10">
+      {/* Top Navigation / Social Links */}
+      <nav className="absolute top-0 left-0 w-full p-6 flex justify-end gap-6 z-20">
+        <a href="https://github.com/oneforalllabs/discussions/discussions" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors">
+          <MessageSquare size={16} /> Discussions
+        </a>
+        <a href="https://github.com/shubham151" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors">
+          <Github size={16} /> GitHub
+        </a>
+        <a href="https://linkedin.com/in/shubham-kumar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors">
+          <Linkedin size={16} /> LinkedIn
+        </a>
+      </nav>
+
+      <div className="max-w-[1180px] mx-auto px-6 py-24 relative z-10">
         
         {/* Hero */}
         <header className="text-center mb-16">
@@ -116,20 +129,9 @@ export default function Home() {
           </p>
         </header>
 
-        {/* Controls: Search + Filters */}
-        <div className="flex flex-col md:flex-row gap-6 mb-12 items-center justify-between">
-          <div className="relative w-full md:w-[320px]">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-faint" size={18} />
-            <input 
-              type="text" 
-              placeholder="Search tools..." 
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-surface/80 border border-line rounded-full py-3 pl-12 pr-4 text-sm text-ink focus:border-accent outline-none backdrop-blur-sm transition-colors"
-            />
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-2">
+        {/* Controls: Tags on Left, Search on Right */}
+        <div className="flex flex-col-reverse md:flex-row gap-6 mb-12 items-center justify-between">
+          <div className="flex flex-wrap justify-center md:justify-start gap-2">
             {[
               { id: 'all', label: 'All Tools' },
               { id: 'dev', label: 'Dev & QA' },
@@ -150,10 +152,21 @@ export default function Home() {
               </button>
             ))}
           </div>
+
+          <div className="relative w-full md:w-[320px]">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-faint" size={18} />
+            <input 
+              type="text" 
+              placeholder="Search tools..." 
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full bg-surface/80 border border-line rounded-full py-3 pl-12 pr-4 text-sm text-ink focus:border-accent outline-none backdrop-blur-sm transition-colors"
+            />
+          </div>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Bento Grid with dense packing to eliminate gaps */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 grid-flow-dense">
           {/* Featured Cards */}
           {featured.map(tool => (
             <a 
@@ -181,7 +194,7 @@ export default function Home() {
             <a 
               key={tool.id} 
               href={tool.url}
-              className="group flex flex-col justify-between bg-surface/40 border border-line hover:border-accent/50 rounded-2xl p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent/5"
+              className="group col-span-1 flex flex-col justify-between bg-surface/40 border border-line hover:border-accent/50 rounded-2xl p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent/5"
             >
               <div>
                 <div className="flex items-start justify-between mb-5">
